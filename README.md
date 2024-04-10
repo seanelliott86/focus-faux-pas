@@ -10,7 +10,11 @@ Focus Faux Pas calculates the minimum and actual focus areas for focusable eleme
 
 ## How to Use
 
-Simply drag and drop the bookmarklet provided into your browser's bookmarks bar. Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and start analyzing the focus appearance of elements.
+To install the bookmarklet go to: [https://seanelliott86.github.io/focus-faux-pas/](https://seanelliott86.github.io/focus-faux-pas/)
+
+Simply drag and drop the bookmarklet provided into your browser's bookmarks bar. Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and see the results!
+
+To remove the results refresh your page.
 
 ## Why did I create this?
 
@@ -18,5 +22,6 @@ Focus is one of the simplest things to add to your site to improve its accessibi
 
 ## Todo
 
+- [ ] Make bookmarklet toggle on and off without needing to refresh
 - [ ] Check color contrast of focus to the background
 - [ ] Other stuff
