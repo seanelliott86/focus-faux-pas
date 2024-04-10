@@ -42,9 +42,19 @@
         h5, h6 {
             text-wrap: balance;
         }
+
+        :focus {
+            outline: #bb1450 solid 2px;
+            outline-offset: 2px;
+        }
+        
         a:not([class]) {
             text-decoration-skip-ink: auto;
-            color: currentColor;
+            color: #bb1450;
+        }
+
+        a:not([class]):hover {
+            color: #000000;
         }
 
         body {
