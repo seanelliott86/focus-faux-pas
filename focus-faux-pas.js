@@ -4,19 +4,23 @@ javascript:(function() {
     // Function to create the indicator container
     function createIndicatorContainer() {
         indicatorContainer = document.createElement('div');
-        indicatorContainer.style.position = "fixed";
-        indicatorContainer.style.top = "10px";
-        indicatorContainer.style.right = "10px";
-        indicatorContainer.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
-        indicatorContainer.style.color = "white";
-        indicatorContainer.style.padding = "10px";
-        indicatorContainer.style.zIndex = "9999";
+        indicatorContainer.classList.add('indicator-container');
         document.body.appendChild(indicatorContainer);
     }
 
     // Inline styles
     var inlineStyles = document.createElement('style');
     inlineStyles.innerHTML = `
+        .indicator-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            z-index: 9999;
+            font-family: Arial, sans-serif;
+        }
         .focus-calculator dt {
             display: block;
             font-weight: bold;
@@ -46,7 +50,7 @@ javascript:(function() {
         var largerArea = largerWidth * largerHeight;
         var smallerArea = smallerWidth * smallerHeight;
         var minPerimeterArea = largerArea - smallerArea;
-        return minPerimeterArea.toFixed(0);
+        return minPerimeterArea;
     }
 
     // Function to calculate the actual perimeter area of the element with outline and outline offset
@@ -63,64 +67,33 @@ javascript:(function() {
         if (actualPerimeterArea === 0) {
             return "No outline set";
         }
-        return actualPerimeterArea.toFixed(0);
+        return actualPerimeterArea;
     }
 
     // Function to temporarily focus on an element to obtain the outline width
     function getOutlineWidth(element) {
-        // Store the original focus state and style
-        var originalFocusState = element.getAttribute('data-focus-state');
-        var originalOutlineStyle = element.style.outline;
-
         // Apply focus
         element.focus();
         // Get the computed outline width
         var computedStyle = window.getComputedStyle(element);
         var outlineWidth = parseInt(computedStyle.getPropertyValue('outline-width').replace('px', ''), 10);
 
-        // Restore the original focus state and style
-        if (originalFocusState === null) {
-            element.removeAttribute('data-focus-state');
-            element.blur();
-        } else {
-            element.setAttribute('data-focus-state', originalFocusState);
-        }
-        element.style.outline = originalOutlineStyle;
-
         return outlineWidth;
     }
 
     // Function to temporarily focus on an element to obtain the outline offset
     function getOutlineOffset(element) {
-        // Store the original focus state and style
-        var originalFocusState = element.getAttribute('data-focus-state');
-        var originalOutlineStyle = element.style.outlineOffset;
-
         // Apply focus
         element.focus();
         // Get the computed outline offset
         var computedStyle = window.getComputedStyle(element);
         var outlineOffset = parseInt(computedStyle.getPropertyValue('outline-offset').replace('px', ''), 10);
 
-        // Restore the original focus state and style
-        if (originalFocusState === null) {
-            element.removeAttribute('data-focus-state');
-            element.blur();
-        } else {
-            element.setAttribute('data-focus-state', originalFocusState);
-        }
-        element.style.outlineOffset = originalOutlineStyle;
-
         return outlineOffset;
     }
 
     // Function to create the list of focusable elements and their calculations
     function createIndicatorList() {
-        // Clear existing content
-        if (indicatorContainer) {
-            indicatorContainer.innerHTML = "";
-        }
-
         // Create the indicator container if it doesn't exist
         if (!indicatorContainer) {
             createIndicatorContainer();
