@@ -22,6 +22,10 @@ Focus is one of the simplest things to add to your site to improve its accessibi
 
 ## Todo
 
-- [ ] Make bookmarklet toggle on and off without needing to refresh
+- [x] Make bookmarklet toggle on and off without needing to refresh
+- [x] Styled the results to be better looking
+- [x] Added build script to take the JS and embed as bookmarklet in HTML page
 - [ ] Check color contrast of focus to the background
-- [ ] Other stuff
+- [ ] Evaluate other outline styles (inset, dotted etc)
+- [ ] Enable checking of other elements (inputs, selects etc) and displaying results in meaningful way
+- [ ] Other stuff...

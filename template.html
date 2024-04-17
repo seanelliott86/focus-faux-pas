@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Faux Pas Bookmarklet</title>
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
+    <style>
+        html {
+            box-sizing: border-box;
+            -moz-text-size-adjust: none;
+            -webkit-text-size-adjust: none;
+            text-size-adjust: none;
+            font-size: 100%;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        body {
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+        body, h1, h2, h3, h4, h5, h6, p,
+        figure, blockquote, dl, dd {
+            margin-block-end: 0;
+        }
+        img, picture, video, canvas, svg {
+            display: block;
+            max-width: 100%;
+        }
+        input, button, textarea, select {
+            font-family: inherit;
+            font-size: inherit;
+        }
+        h1, h2, h3, h4, h5, h6
+        button, input, label {
+            line-height: 1.1;
+        }
+        h1, h2,
+        h3, h4, 
+        h5, h6 {
+            text-wrap: balance;
+        }
+
+        :focus {
+            outline: #bb1450 solid 2px;
+            outline-offset: 2px;
+        }
+        
+        a:not([class]) {
+            text-decoration-skip-ink: auto;
+            color: #bb1450;
+        }
+
+        a:not([class]):hover {
+            color: #000000;
+        }
+
+        body {
+            padding:10%;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        h1 {
+            font-weight: 600;
+            font-size: 2.25rem;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.75rem;
+        }
+            
+    </style>
+</head>
+
+<body>
+    <h1>Focus Faux Pas - your friendly accessibility bookmarklet superhero!</h1>
+
+    <h2>What is Focus Faux Pas?</h2>
+    <p>Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html" rel="nofollow">Focus Appearance (Level AAA) WCAG Guideline</a>. It checks elements like buttons, links, and more, ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).</p>
+
+    <h2>How Does it Work?</h2>
+    <p>Focus Faux Pas calculates the minimum and actual focus areas for focusable elements, taking into account style details like outline width and offset. It then provides a visual indicator to show if each element's focus game is up to snuff or needs a little extra love.</p>
+
+    <h2>How to Use</h2>
+
+    <p>Drag this link to your browser toolbar: <!-- BOOKMARKLET_PLACEHOLDER --></p>
+
+    <p>Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and see the results!</p>
+
+<p>To remove the results refresh your page.</p>
+
+    <hr>
+
+    <p>Let Focus Faux Pas be your guide to accessibility excellence! Happy coding! 🚀</p>
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result window</title>
+    <style>        
+        html{
+            box-sizing: border-box;
+        }
+        *, ::before, ::after {
+            box-sizing: inherit;
+        }
+    </style>
+    <style>
+        .ffp-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            bottom: 1rem;
+            padding: 1rem;
+            z-index: 9999;
+            width: 100%;
+            min-width: 250px;
+            max-width: 300px;
+            height: 80%;
+            overflow-y: auto;
+            border: solid 1px #e2e4e6;
+            color: #333;
+            background: rgba(255, 255, 255, 0.74);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(7.4px);
+            font-size: 1rem;
+        }
+
+        .ffp-container *{
+            all: unset;
+        }
+
+        .ffp-result-container{
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            background-color: #F6F5FF;
+            display: block;
+        }
+        .ffp-result-container dt {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: block;
+            font-weight: bold;
+        }
+        .ffp-result-container dd {
+            font-family: Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.5;
+            display: block;
+            margin: 0 0 0.5rem 0;
+            color: #707070;
+        }
+
+        .ffp-main-heading{
+            font-family: Arial, sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            line-height: 1.25;
+            color: #000;
+            display: block;
+            margin: 0 0 1rem 0;
+            padding: 0 0 1rem 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .ffp-result-heading{
+            font-family: Arial, sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+            line-height: 1.25;
+            color: #000;
+            display: flex;
+            align-items: center;  
+            margin: 0 0 1rem 0;
+        }
+
+        .ffp-result{
+            display: inline-block;
+            padding: 0.125rem;
+            font-size: 1rem;
+            margin-left: 0.75rem;
+            min-width: 50px;
+            text-align: center;
+            color: #fff;
+            border-radius: 4px;;
+        }
+
+        .ffp-result_pass {
+            background-color: green;
+        }
+        .ffp-result_fail {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="focusFauxPas" class="ffp-container">
+        <h1 class="ffp-main-heading">Focus faux pas results</h1>
+        <div class="ffp-result-container">
+            <h2 class="ffp-result-heading"><span>button</span> <small class="ffp-result ffp-result_pass">Pass</small></h2>
+            <dl>
+                <dt>Text Content</dt>
+                <dd>Passing button</dd>
+                <dt>Minimum Focus Area:</dt>
+                <dd>900</dd>
+                <dt>Actual Focus Area:</dt>
+                <dd>1800</dd>
+            </dl>
+        </div>
+        <div class="ffp-result-container">
+            <h2 class="ffp-result-heading"><span>button</span> <small class="ffp-result ffp-result_fail">Fail</small></h2>
+            <dl>
+                <dt>Text Content</dt>
+                <dd>No outline button</dd>
+                <dt>Minimum Focus Area:</dt>
+                <dd>900</dd>
+                <dt>Actual Focus Area:</dt>
+                <dd>Outline removed</dd>
+            </dl>
+        </div>
+    </div>
+</body>
+
+</html>

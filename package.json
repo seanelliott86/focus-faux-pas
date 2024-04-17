@@ -1,0 +1,26 @@
+{
+  "name": "focus-faux-pas",
+  "version": "1.0.0",
+  "description": "a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with WCAG Guidelines",
+  "main": "focus-faux-pas.js",
+  "scripts": {
+    "build": "node build.js",
+    "start": "http-server ./",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanelliott86/focus-faux-pas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seanelliott86/focus-faux-pas/issues"
+  },
+  "homepage": "https://github.com/seanelliott86/focus-faux-pas#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "terser": "^5.30.3"
+  }
+}
