@@ -14,7 +14,7 @@ To install the bookmarklet go to: [https://seanelliott86.github.io/focus-faux-pa
 
 Simply drag and drop the bookmarklet provided into your browser's bookmarks bar. Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and see the results!
 
-To remove the results refresh your page.
+To remove the results click the bookmarklet again.
 
 ## Why did I create this?
 
