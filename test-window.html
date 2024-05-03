@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="test-window.css" />
+  </head>
+  <body>
+    <h1>Test window</h1>
+
+    <h2>Outline check</h2>
+    <button type="button">Passing button</button>
+    <button type="button" class="button-custom">Passing button</button>
+    <button type="button" class="button-custom button-fail">No outline button</button>
+    <button type="button" class="button-custom button-fail-alt">
+      Button with 1px outline
+    </button>
+
+    <h2>Color contrast check</h2>
+    <div class="stuff">
+      <button type="button">Passing button</button>
+      <button type="button" class="button-custom button-fail cc">No outline button</button>
+      <button type="button" class="button-custom button-fail-alt cc">
+        Button with 1px outline
+      </button>
+    </div>
+  </body>
+</html>

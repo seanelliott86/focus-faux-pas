@@ -1,7 +1,20 @@
-import { readFile, minifyJS, toBookmarklet, readHTMLTemplate, writeHTMLFile } from './utils.js';
+import chokidar from 'chokidar';
+import { readFile, minifyJS, readHTMLTemplate, writeHTMLFile, toBookmarklet } from './utils.js';
 
-// Run the build process
+// Run the build process initially
 buildBookmarklet();
+
+// Watch for changes in JavaScript and HTML files
+const watcher = chokidar.watch(['focus-faux-pas.js', 'template.html'], {
+    persistent: true,
+});
+
+watcher.on('change', async (filePath) => {
+    console.log(`File ${filePath} has been changed. Rebuilding bookmarklet...`);
+    await buildBookmarklet();
+});
+
+console.log('Watching for changes...');
 
 async function buildBookmarklet() {
     try {

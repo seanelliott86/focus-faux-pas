@@ -1,8 +1,8 @@
-# Focus Faux Pas - your friendly accessibility bookmarklet superhero!
+# Focus Faux Pas Bookmarklet
 
 ## What is Focus Faux Pas?
 
-Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with [Focus Appearance (Level AAA) WCAG Guideline](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html). It checks elements like buttons, links, and more, ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).
+Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with [Focus Appearance (Level AAA) WCAG Guideline](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html). It checks elements like buttons and links ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).
 
 ## How Does it Work?
 
@@ -16,16 +16,13 @@ Simply drag and drop the bookmarklet provided into your browser's bookmarks bar.
 
 To remove the results click the bookmarklet again.
 
+## What Focus Faux Pas doesn't check... just yet?
+
+* Elements like inputs, selects, I need to work on a useful way to display results
+* Colour contrast of the outline
+* Other outline styles (inset, dotted etc)
+* Conformance via other methods to produce an "outline" such and box-shadow
+
 ## Why did I create this?
 
 Focus is one of the simplest things to add to your site to improve its accessibility, the [Focus Appearance WCAG Guideline](https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html) is new in WCAG 2.2 but it's a AAA level guideline. Most people lump AAA guidelines in the too-hard basket so this tool helps you check if the focus is of sufficient size to pass the guideline.
-
-## Todo
-
-- [x] Make bookmarklet toggle on and off without needing to refresh
-- [x] Styled the results to be better looking
-- [x] Added build script to take the JS and embed as bookmarklet in HTML page
-- [ ] Check color contrast of focus to the background
-- [ ] Evaluate other outline styles (inset, dotted etc)
-- [ ] Enable checking of other elements (inputs, selects etc) and displaying results in meaningful way
-- [ ] Other stuff...

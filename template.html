@@ -5,8 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Focus Faux Pas Bookmarklet</title>
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css">
-    <style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+<style>
         html {
             box-sizing: border-box;
             -moz-text-size-adjust: none;
@@ -23,7 +25,7 @@
         }
         body, h1, h2, h3, h4, h5, h6, p,
         figure, blockquote, dl, dd {
-            margin-block-end: 0;
+            margin-block: 0;
         }
         img, picture, video, canvas, svg {
             display: block;
@@ -41,6 +43,7 @@
         h3, h4, 
         h5, h6 {
             text-wrap: balance;
+            margin-block: 0;
         }
 
         :focus {
@@ -58,43 +61,119 @@
         }
 
         body {
-            padding:10%;
+            padding-block: 1rem;
+            padding-inline: 1rem;
+            margin: 0;
             font-family: 'Open Sans', sans-serif;
+            display: flex;
+	        justify-content: center;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: repeat;
+            background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox=%220 0 2000 1000%22 xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cmask id=%22b%22 x=%220%22 y=%220%22 width=%222000%22 height=%221000%22%3E%3Cpath fill=%22url(%23a)%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3C%2Fmask%3E%3Cpath fill=%22%23bb1450%22 d=%22M0 0h2000v1000H0z%22%2F%3E%3Cg style=%22transform-origin:center center%22 stroke=%22%23120a114d%22 stroke-width=%22.6%22 mask=%22url(%23b)%22%3E%3Cpath fill=%22none%22 d=%22M0 0h91v91H0zM91 0h91v91H91zM182 0h91v91h-91zM273 0h91v91h-91zM364 0h91v91h-91zM455 0h91v91h-91zM546 0h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1105%22 d=%22M637 0h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1130%22 d=%22M728 0h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M819 0h91v91h-91zM910 0h91v91h-91zM1001 0h91v91h-91zM1092 0h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1131%22 d=%22M1183 0h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1274 0h91v91h-91zM1365 0h91v91h-91zM1456 0h91v91h-91zM1547 0h91v91h-91zM1638 0h91v91h-91zM1729 0h91v91h-91zM1820 0h91v91h-91zM1911 0h91v91h-91zM0 91h91v91H0zM91 91h91v91H91zM182 91h91v91h-91zM273 91h91v91h-91zM364 91h91v91h-91zM455 91h91v91h-91zM546 91h91v91h-91zM637 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a113b%22 d=%22M728 91h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M819 91h91v91h-91zM910 91h91v91h-91zM1001 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1126%22 d=%22M1092 91h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1183 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1126%22 d=%22M1274 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1143%22 d=%22M1365 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1144%22 d=%22M1456 91h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1547 91h91v91h-91zM1638 91h91v91h-91zM1729 91h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a111a%22 d=%22M1820 91h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1911 91h91v91h-91zM0 182h91v91H0zM91 182h91v91H91zM182 182h91v91h-91zM273 182h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1129%22 d=%22M364 182h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M455 182h91v91h-91zM546 182h91v91h-91zM637 182h91v91h-91zM728 182h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1148%22 d=%22M819 182h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M910 182h91v91h-91zM1001 182h91v91h-91zM1092 182h91v91h-91zM1183 182h91v91h-91zM1274 182h91v91h-91zM1365 182h91v91h-91zM1456 182h91v91h-91zM1547 182h91v91h-91zM1638 182h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1132%22 d=%22M1729 182h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1820 182h91v91h-91zM1911 182h91v91h-91zM0 273h91v91H0zM91 273h91v91H91zM182 273h91v91h-91zM273 273h91v91h-91zM364 273h91v91h-91zM455 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1110%22 d=%22M546 273h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M637 273h91v91h-91zM728 273h91v91h-91zM819 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1109%22 d=%22M910 273h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1001 273h91v91h-91zM1092 273h91v91h-91zM1183 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1143%22 d=%22M1274 273h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1365 273h91v91h-91zM1456 273h91v91h-91zM1547 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a113d%22 d=%22M1638 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1148%22 d=%22M1729 273h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1135%22 d=%22M1820 273h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1911 273h91v91h-91zM0 364h91v91H0zM91 364h91v91H91zM182 364h91v91h-91zM273 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1125%22 d=%22M364 364h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M455 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1102%22 d=%22M546 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a114a%22 d=%22M637 364h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M728 364h91v91h-91zM819 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1138%22 d=%22M910 364h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1001 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1108%22 d=%22M1092 364h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1183 364h91v91h-91zM1274 364h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1135%22 d=%22M1365 364h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1456 364h91v91h-91zM1547 364h91v91h-91zM1638 364h91v91h-91zM1729 364h91v91h-91zM1820 364h91v91h-91zM1911 364h91v91h-91zM0 455h91v91H0z%22%2F%3E%3Cpath fill=%22%23120a1116%22 d=%22M91 455h91v91H91z%22%2F%3E%3Cpath fill=%22%23120a1120%22 d=%22M182 455h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M273 455h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1116%22 d=%22M364 455h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M455 455h91v91h-91zM546 455h91v91h-91zM637 455h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1117%22 d=%22M728 455h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M819 455h91v91h-91zM910 455h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1103%22 d=%22M1001 455h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1130%22 d=%22M1092 455h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1183 455h91v91h-91zM1274 455h91v91h-91zM1365 455h91v91h-91zM1456 455h91v91h-91zM1547 455h91v91h-91zM1638 455h91v91h-91zM1729 455h91v91h-91zM1820 455h91v91h-91zM1911 455h91v91h-91zM0 546h91v91H0zM91 546h91v91H91z%22%2F%3E%3Cpath fill=%22%23120a112b%22 d=%22M182 546h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M273 546h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1106%22 d=%22M364 546h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M455 546h91v91h-91zM546 546h91v91h-91zM637 546h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1112%22 d=%22M728 546h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a110a%22 d=%22M819 546h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M910 546h91v91h-91zM1001 546h91v91h-91zM1092 546h91v91h-91zM1183 546h91v91h-91zM1274 546h91v91h-91zM1365 546h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a113f%22 d=%22M1456 546h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1110%22 d=%22M1547 546h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1638 546h91v91h-91zM1729 546h91v91h-91zM1820 546h91v91h-91zM1911 546h91v91h-91zM0 637h91v91H0zM91 637h91v91H91zM182 637h91v91h-91zM273 637h91v91h-91zM364 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1129%22 d=%22M455 637h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M546 637h91v91h-91zM637 637h91v91h-91zM728 637h91v91h-91zM819 637h91v91h-91zM910 637h91v91h-91zM1001 637h91v91h-91zM1092 637h91v91h-91zM1183 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1112%22 d=%22M1274 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a110f%22 d=%22M1365 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1134%22 d=%22M1456 637h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1547 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1134%22 d=%22M1638 637h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1729 637h91v91h-91zM1820 637h91v91h-91zM1911 637h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a111a%22 d=%22M0 728h91v91H0z%22%2F%3E%3Cpath fill=%22none%22 d=%22M91 728h91v91H91zM182 728h91v91h-91zM273 728h91v91h-91zM364 728h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a113c%22 d=%22M455 728h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M546 728h91v91h-91zM637 728h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a110b%22 d=%22M728 728h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M819 728h91v91h-91zM910 728h91v91h-91zM1001 728h91v91h-91zM1092 728h91v91h-91zM1183 728h91v91h-91zM1274 728h91v91h-91zM1365 728h91v91h-91zM1456 728h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1117%22 d=%22M1547 728h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1133%22 d=%22M1638 728h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a111b%22 d=%22M1729 728h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1820 728h91v91h-91zM1911 728h91v91h-91zM0 819h91v91H0zM91 819h91v91H91z%22%2F%3E%3Cpath fill=%22%23120a1132%22 d=%22M182 819h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M273 819h91v91h-91zM364 819h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1123%22 d=%22M455 819h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M546 819h91v91h-91zM637 819h91v91h-91zM728 819h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a112b%22 d=%22M819 819h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a110f%22 d=%22M910 819h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1001 819h91v91h-91zM1092 819h91v91h-91zM1183 819h91v91h-91zM1274 819h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1138%22 d=%22M1365 819h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1456 819h91v91h-91zM1547 819h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a111b%22 d=%22M1638 819h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1729 819h91v91h-91zM1820 819h91v91h-91zM1911 819h91v91h-91zM0 910h91v91H0zM91 910h91v91H91zM182 910h91v91h-91zM273 910h91v91h-91zM364 910h91v91h-91zM455 910h91v91h-91zM546 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1129%22 d=%22M637 910h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M728 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1125%22 d=%22M819 910h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M910 910h91v91h-91zM1001 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1146%22 d=%22M1092 910h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1183 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1137%22 d=%22M1274 910h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1365 910h91v91h-91zM1456 910h91v91h-91zM1547 910h91v91h-91zM1638 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a1119%22 d=%22M1729 910h91v91h-91z%22%2F%3E%3Cpath fill=%22%23120a111f%22 d=%22M1820 910h91v91h-91z%22%2F%3E%3Cpath fill=%22none%22 d=%22M1911 910h91v91h-91z%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3CradialGradient id=%22a%22%3E%3Cstop offset=%2250%25%22 stop-color=%22%23fff%22 stop-opacity=%220%22%2F%3E%3Cstop offset=%221%22 stop-color=%22%23fff%22 stop-opacity=%22.5%22%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3C%2Fsvg%3E");
+       
+        }
+
+        @media (min-width: 37.5em) {
+            body {
+                padding-block: 2rem;
+                padding-inline: 2rem;
+            }
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Oswald", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
         }
         
-        h1 {
-            font-weight: 600;
-            font-size: 2.25rem;
+        .title-text {
+            font-size: clamp(3rem, 8.197vw + 1.004rem, 5rem);
+            text-wrap: pretty;
         }
 
         h2 {
-            font-weight: 600;
             font-size: 1.75rem;
         }
-            
+
+        header {
+            border-bottom: solid 2px #ccc;
+            padding-block: 4rem 2rem;
+            padding-inline: 0;
+            margin-block-end: 2rem;
+        }
+
+        footer {
+            border-top: solid 2px #ccc;
+            padding-block: 1rem;
+            padding-inline: 0;
+            margin-block-start: 2rem;
+        }
+
+        .container{
+            background-color: #fff;
+            padding-inline: 1rem;
+            max-width: 600px;
+        }
+
+        .container:focus-within{
+            outline: solid 2px #fff;
+            outline-offset: 2px;
+        }
+        
+        .content-area > h2, .content-area > h3, .content-area > h4, .content-area > h5, .content-area > h6, .content-area > p,
+        .content-area > figure, .content-area > blockquote, .content-area > dl, .content-area > dd{
+            margin-block-end: 1rem;
+        }
+
+        .content-area p:has(+ :not(p)){
+            margin-block-end: 2rem;
+        }
     </style>
 </head>
 
 <body>
-    <h1>Focus Faux Pas - your friendly accessibility bookmarklet superhero!</h1>
+    <div class="container">
+        <header>
+            <h1 class="title-text">Focus Faux Pas Bookmarklet</h1>
+        </header>
+        <main>
+            <div class="content-area">
+                <h2>What is Focus Faux Pas?</h2>
+                <p>Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html" rel="nofollow">Focus Appearance (Level AAA) WCAG Guideline</a>. It checks elements like buttons and links ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).</p>
 
-    <h2>What is Focus Faux Pas?</h2>
-    <p>Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html" rel="nofollow">Focus Appearance (Level AAA) WCAG Guideline</a>. It checks elements like buttons, links, and more, ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).</p>
+                <h2>How does it work?</h2>
+                <p>Focus Faux Pas calculates the minimum and actual focus areas for focusable elements, taking into account style details like outline width and offset. It then provides a visual indicator to show if each element's focus game is up to snuff or needs a little extra love.</p>
 
-    <h2>How Does it Work?</h2>
-    <p>Focus Faux Pas calculates the minimum and actual focus areas for focusable elements, taking into account style details like outline width and offset. It then provides a visual indicator to show if each element's focus game is up to snuff or needs a little extra love.</p>
+                <h2>How to use</h2>
 
-    <h2>How to Use</h2>
+                <p>Drag this link to your browser toolbar: <!-- BOOKMARKLET_PLACEHOLDER --></p>
 
-    <p>Drag this link to your browser toolbar: <!-- BOOKMARKLET_PLACEHOLDER --></p>
+                <p>Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and see the results!</p>
 
-    <p>Then, when you're on a webpage, click the bookmarklet to activate Focus Faux Pas and see the results!</p>
+                <p>To remove the results click the bookmarklet again.</p>
 
-    <p>To remove the results click the bookmarklet again.</p>
+                <h2>What Focus Faux Pas doesn't check... just yet?</h2>
 
-    <hr>
+                <ul>
+                    <li>Elements like inputs, selects just yet... need to work on a useful way to display results</li>
+                    <li>Colour contrast of the outline</li>
+                    <li>Other outline styles (inset, dotted etc)</li>
+                    <li>Conformance via other methods to produce an "outline" such and box-shadow</li>
+                </ul>
 
-    <p>Let Focus Faux Pas be your guide to accessibility excellence! Happy coding! 🚀</p>
+                <h2>Why did I create this?</h2>
+
+                <p>Focus is one of the simplest things to add to your site to improve its accessibility, the <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html">Focus Appearance WCAG Guideline</a> is new in WCAG 2.2 but it's a AAA level guideline. Most people lump AAA guidelines in the too-hard basket so this tool helps you check if the focus is of sufficient size to pass the guideline.</p>
+            </div>
+        </main>
+        <footer>
+            &copy; 2024 Sean Elliott. All rights reserved
+        </footer>
+    </div>
 </body>
 
 </html>

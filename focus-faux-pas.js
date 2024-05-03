@@ -144,11 +144,13 @@ const getOutlineValues = (element) => {
     // Get the computed outline width
     const computedStyle = window.getComputedStyle(element);
     const outlineWidth = parseInt(computedStyle.getPropertyValue('outline-width').replace('px', ''), 10);
+    const outlineStyle = computedStyle.getPropertyValue('outline-style');
     const outlineOffset = outlineWidth > 0 ? parseInt(computedStyle.getPropertyValue('outline-offset').replace('px', ''), 10) : 0;
-
+    
     return {
         width: outlineWidth,
         offset: outlineOffset,
+        styles: outlineStyle,
     };
 };
 
