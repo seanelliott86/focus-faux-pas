@@ -98,6 +98,26 @@ const addStyles = () => {
     document.head.appendChild(inlineStyles);
 };
 
+const getContrastRatio = (color1, color2) => {
+    function getLuminance(color) {
+        var rgb = color.match(/\d+/g);
+        if (!rgb) return 1; // Default to white if color is not found
+        for (var i = 0; i < 3; i++) {
+            rgb[i] /= 255;
+            rgb[i] = rgb[i] <= 0.03928 ? rgb[i] / 12.92 : Math.pow((rgb[i] + 0.055) / 1.055, 2.4);
+        }
+        return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+    }
+
+    var luminance1 = getLuminance(color1);
+    var luminance2 = getLuminance(color2);
+
+    var brighter = Math.max(luminance1, luminance2);
+    var darker = Math.min(luminance1, luminance2);
+
+    return (brighter + 0.05) / (darker + 0.05);
+}
+
 // Function to create the indicator container
 const createIndicatorContainer = () => {
     const indicatorContainer = document.createElement('div');
@@ -125,8 +145,7 @@ const calculateMinPerimeterArea = (element) => {
 };
 
 // Function to calculate the actual perimeter area of the element with outline and outline offset
-const calculateActualPerimeterArea = (element) => {
-    const outlineValues = getOutlineValues(element);
+const calculateActualPerimeterArea = (element, outlineValues) => {
     const largerWidth = element.offsetWidth + outlineValues.width + outlineValues.offset; // Adding outline width and offset
     const largerHeight = element.offsetHeight + outlineValues.width + outlineValues.offset; // Adding outline width and offset
     const smallerWidth = element.offsetWidth - outlineValues.width - outlineValues.offset; // Subtracting outline width and offset
@@ -146,13 +165,43 @@ const getOutlineValues = (element) => {
     const outlineWidth = parseInt(computedStyle.getPropertyValue('outline-width').replace('px', ''), 10);
     const outlineStyle = computedStyle.getPropertyValue('outline-style');
     const outlineOffset = outlineWidth > 0 ? parseInt(computedStyle.getPropertyValue('outline-offset').replace('px', ''), 10) : 0;
-    
+    const outlineColor = computedStyle.getPropertyValue('outline-color');
+
+    console.log('outlinecolor', outlineColor);
+
     return {
         width: outlineWidth,
         offset: outlineOffset,
         styles: outlineStyle,
+        color: outlineColor,
     };
 };
+
+const getParentInformation = (element) => {
+    let parentBackgroundColor = 'rgb(255, 255, 255)'; // Default to white
+    let backgroundElement = '';
+
+    let parent = element.parentElement;
+    while (parent) {
+        const parentStyle = window.getComputedStyle(parent);
+        const backgroundColor = parentStyle.getPropertyValue('background-color');
+        if (backgroundColor !== 'rgba(0, 0, 0, 0)') {
+            parentBackgroundColor = backgroundColor;
+            backgroundElement = parent.tagName;
+            break;
+        }
+        parent = parent.parentElement;
+    }
+
+    if (backgroundElement === '') {
+        backgroundElement = 'HTML';
+    }
+
+    return {
+        element: backgroundElement,
+        color: parentBackgroundColor
+    }
+}
 
 // Function to create the list of focusable elements and their calculations
 const createIndicatorList = () => {
@@ -166,9 +215,18 @@ const createIndicatorList = () => {
     // Iterate over focusable elements
     focusableElements.forEach((element) => {
         const minPerimeterArea = calculateMinPerimeterArea(element);
-        const actualPerimeterArea = calculateActualPerimeterArea(element);
+        const outlineValues = getOutlineValues(element);
+        const actualPerimeterArea = calculateActualPerimeterArea(element, outlineValues);
+        const parentInformation = getParentInformation(element);
         const noOutlineSet = actualPerimeterArea === 0;
-        const isPassing = parseFloat(actualPerimeterArea) >= parseFloat(minPerimeterArea);
+        console.log('outlineValues',outlineValues)
+        console.log('parentInformation',parentInformation)
+        const contrastRatio = getContrastRatio(outlineValues.color, parentInformation.color);
+        const isPassingPerimeter = parseFloat(actualPerimeterArea) >= parseFloat(minPerimeterArea);
+        const isPassingColorContrast = contrastRatio >= 3;
+        const isPassingAll = isPassingPerimeter && isPassingColorContrast;
+
+        console.log(isPassingAll)
 
         // Create a list item for each focusable element
         const tagName = element.tagName.toLowerCase();
@@ -179,9 +237,9 @@ const createIndicatorList = () => {
         const elementTag = document.createElement('span');
         elementTag.textContent = tagName;
         const passFailText = document.createElement('small');
-        passFailText.textContent = isPassing ? "Pass" : "Fail";
+        passFailText.textContent = isPassingAll ? "Pass" : "Fail";
         passFailText.classList.add('ffp-result')
-        passFailText.classList.add(isPassing ? "ffp-result_pass" : "ffp-result_fail");
+        passFailText.classList.add(isPassingAll ? "ffp-result_pass" : "ffp-result_fail");
         heading.classList.add('ffp-result-heading');
         heading.appendChild(elementTag);
         heading.appendChild(passFailText);
