@@ -5,7 +5,7 @@ let stylesAdded = document.getElementById('focusFauxPasStyles');
 const addStyles = () => {
     // Inline styles
     const inlineStyles = document.createElement('style');
-    inlineStyles.id = 'focusFauxPasStyles'; // Add an ID to identify the styles
+    inlineStyles.id = 'focusFauxPasStyles';
     inlineStyles.innerHTML = `
         .ffp-container {
             position: fixed;
@@ -49,7 +49,8 @@ const addStyles = () => {
             font-family: Arial, sans-serif;
             font-size: 1rem;
             line-height: 1.5;
-            display: block;
+            display: flex;
+            align-items: center;
             margin: 0 0 0.5rem 0;
             color: #707070;
         }
@@ -67,25 +68,27 @@ const addStyles = () => {
         }
 
         .ffp-result-heading{
-            font-family: Arial, sans-serif;
-            font-weight: 600;
-            font-size: 1.5rem;
-            line-height: 1.25;
-            color: #000;
-            display: flex;
-            align-items: center;  
+            page-break-inside: avoid;
+            font-family: monospace;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 100%;
+            overflow: auto;
+            display: block;
+            word-wrap: break-word;
             margin: 0 0 1rem 0;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+            padding-bottom: 0.5rem;
         }
 
         .ffp-result{
             display: inline-block;
-            padding: 0.125rem;
-            font-size: 1rem;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.75rem;
             margin-left: 0.75rem;
-            min-width: 50px;
             text-align: center;
             color: #fff;
-            border-radius: 4px;;
+            border-radius: 4px;
         }
 
         .ffp-result_pass {
@@ -158,16 +161,14 @@ const calculateActualPerimeterArea = (element, outlineValues) => {
 
 // Function to temporarily focus on an element to obtain the outline values
 const getOutlineValues = (element) => {
-    // Apply focus
     element.focus();
+
     // Get the computed outline width
     const computedStyle = window.getComputedStyle(element);
     const outlineWidth = parseInt(computedStyle.getPropertyValue('outline-width').replace('px', ''), 10);
     const outlineStyle = computedStyle.getPropertyValue('outline-style');
     const outlineOffset = outlineWidth > 0 ? parseInt(computedStyle.getPropertyValue('outline-offset').replace('px', ''), 10) : 0;
     const outlineColor = computedStyle.getPropertyValue('outline-color');
-
-    console.log('outlinecolor', outlineColor);
 
     return {
         width: outlineWidth,
@@ -219,30 +220,20 @@ const createIndicatorList = () => {
         const actualPerimeterArea = calculateActualPerimeterArea(element, outlineValues);
         const parentInformation = getParentInformation(element);
         const noOutlineSet = actualPerimeterArea === 0;
-        console.log('outlineValues',outlineValues)
-        console.log('parentInformation',parentInformation)
         const contrastRatio = getContrastRatio(outlineValues.color, parentInformation.color);
         const isPassingPerimeter = parseFloat(actualPerimeterArea) >= parseFloat(minPerimeterArea);
-        const isPassingColorContrast = contrastRatio >= 3;
+        const isPassingColorContrast = contrastRatio.toFixed(2) >= 3;
         const isPassingAll = isPassingPerimeter && isPassingColorContrast;
-
-        console.log(isPassingAll)
 
         // Create a list item for each focusable element
         const tagName = element.tagName.toLowerCase();
         const listItem = document.createElement('div');
         listItem.classList.add("ffp-result-container");
 
+        // Create a heading element for each focusable elemnt
         const heading = document.createElement('h2');
-        const elementTag = document.createElement('span');
-        elementTag.textContent = tagName;
-        const passFailText = document.createElement('small');
-        passFailText.textContent = isPassingAll ? "Pass" : "Fail";
-        passFailText.classList.add('ffp-result')
-        passFailText.classList.add(isPassingAll ? "ffp-result_pass" : "ffp-result_fail");
+        heading.textContent = "<" + tagName + ' />';
         heading.classList.add('ffp-result-heading');
-        heading.appendChild(elementTag);
-        heading.appendChild(passFailText);
         listItem.appendChild(heading);
 
         const dl = document.createElement('dl');
@@ -251,14 +242,29 @@ const createIndicatorList = () => {
         const dd1 = document.createElement('dd');
         dd1.textContent = element.textContent;
         const dt2 = document.createElement('dt');
-        dt2.textContent = "Minimum Focus Area:";
+        dt2.textContent = "Focus area (minimum " + minPerimeterArea + "):";
         const dd2 = document.createElement('dd');
-        dd2.textContent = minPerimeterArea;
-        const dt3 = document.createElement('dt');
-        dt3.textContent = "Actual Focus Area:";
-        const dd3 = document.createElement('dd');
-        dd3.textContent = noOutlineSet ? "Outline removed" : actualPerimeterArea;
+        const dd2spantext = document.createElement('span');
+        dd2spantext.textContent = noOutlineSet ? "Outline removed" : actualPerimeterArea;
+        const dd2passFailText = document.createElement('small');
+        dd2passFailText.textContent = isPassingPerimeter ? "Pass" : "Fail";
+        dd2passFailText.classList.add('ffp-result')
+        dd2passFailText.classList.add(isPassingPerimeter ? "ffp-result_pass" : "ffp-result_fail");
+        dd2.appendChild(dd2spantext);
+        dd2.appendChild(dd2passFailText);
 
+        const dt3 = document.createElement('dt');
+        dt3.textContent = "Contrast ratio (minimum 3:1)";
+        const dd3 = document.createElement('dd');
+        const dd3spantext = document.createElement('span');
+        dd3spantext.textContent = contrastRatio.toFixed(2) + ":1";
+        const dd3passFailText = document.createElement('small');
+        dd3passFailText.textContent = isPassingColorContrast ? "Pass" : "Fail";
+        dd3passFailText.classList.add('ffp-result')
+        dd3passFailText.classList.add(isPassingColorContrast ? "ffp-result_pass" : "ffp-result_fail");
+        dd3.appendChild(dd3spantext);
+        dd3.appendChild(dd3passFailText);
+        
         dl.appendChild(dt1);
         dl.appendChild(dd1);
         dl.appendChild(dt2);

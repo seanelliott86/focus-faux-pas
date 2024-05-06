@@ -146,7 +146,8 @@
                 <p>Focus Faux Pas is a handy bookmarklet designed to help you ensure that the focus appearance of focusable elements on a web page complies with <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html" rel="nofollow">Focus Appearance (Level AAA) WCAG Guideline</a>. It checks elements like buttons and links ensuring their focus is as sharp as a tack according to the Web Content Accessibility Guidelines (WCAG).</p>
 
                 <h2>How does it work?</h2>
-                <p>Focus Faux Pas calculates the minimum and actual focus areas for focusable elements, taking into account style details like outline width and offset. It then provides a visual indicator to show if each element's focus game is up to snuff or needs a little extra love.</p>
+                <p>Focus Faux Pas calculates the minimum and actual focus areas for focusable elements, taking into account style details like outline width and offset. It also checks the outline color to see if it passes 3:1 contrast ratio. It then creates a result window to show if each element's focus game is up to snuff or needs a little extra love.</p>
+                <p>NOTE: When calculating color contrast, if the bookmarklet cant find a background color in the focusable elements imeadiate parent it will keep searching parent elements, if none can be found an assumption is made the background is white.</p>
 
                 <h2>How to use</h2>
 
@@ -160,14 +161,13 @@
 
                 <ul>
                     <li>Elements like inputs, selects just yet... need to work on a useful way to display results</li>
-                    <li>Colour contrast of the outline</li>
                     <li>Other outline styles (inset, dotted etc)</li>
                     <li>Conformance via other methods to produce an "outline" such and box-shadow</li>
                 </ul>
 
                 <h2>Why did I create this?</h2>
 
-                <p>Focus is one of the simplest things to add to your site to improve its accessibility, the <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html">Focus Appearance WCAG Guideline</a> is new in WCAG 2.2 but it's a AAA level guideline. Most people lump AAA guidelines in the too-hard basket so this tool helps you check if the focus is of sufficient size to pass the guideline.</p>
+                <p>Focus is one of the simplest things to add to your site to improve its accessibility, the <a href="https://www.w3.org/WAI/WCAG22/Understanding/focus-appearance.html">Focus Appearance WCAG Guideline</a> is new in WCAG 2.2, even though it's a AAA level guideline this is one of the easier AAA guidelines to meet and more people should be ticking this one off their checklist. Now you can test your focus using this handy bookmarklet.</p>
             </div>
         </main>
         <footer>
