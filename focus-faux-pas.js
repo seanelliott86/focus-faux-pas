@@ -143,28 +143,7 @@
         `;
         document.head.appendChild(inlineStyles);
     };
-    
-    // Function to create the highlight overlay
-    const createHighlightOverlay = (element, id) => {
-        const existingOverlay = document.getElementById(id);
-    
-        if (existingOverlay) {
-            existingOverlay.remove();
-        } else {
-            const highlightOverlay = document.createElement('div');
-            highlightOverlay.id = id;
-            highlightOverlay.classList.add('ffp-highlight-overlay');
-    
-            const rect = element.getBoundingClientRect();
-    
-            highlightOverlay.style.width = rect.width + 4 + 'px';
-            highlightOverlay.style.height = rect.height + 4 + 'px';
-            highlightOverlay.style.top = rect.top + window.scrollY - 4 + 'px';
-            highlightOverlay.style.left = rect.left + window.scrollX - 4 + 'px';
-    
-            document.body.appendChild(highlightOverlay);
-        }
-    };
+
     
     const getContrastRatio = (color1, color2) => {
         function getLuminance(color) {
@@ -269,12 +248,27 @@
         }
     }
     
-    const highlightElement = (element) => {
-        element.classList.toggle('ffp-highlighted');
-    };
+    const createHighlightOverlay = (element, id) => {
+        const existingOverlay = document.getElementById(id);
     
+        if (existingOverlay) {
+            existingOverlay.remove();
+        } else {
+            const highlightOverlay = document.createElement('div');
+            highlightOverlay.id = id;
+            highlightOverlay.classList.add('ffp-highlight-overlay');
     
-    // Function to create the list of focusable elements and their calculations
+            const rect = element.getBoundingClientRect();
+    
+            highlightOverlay.style.width = rect.width + 4 + 'px';
+            highlightOverlay.style.height = rect.height + 4 + 'px';
+            highlightOverlay.style.top = rect.top + window.scrollY - 4 + 'px';
+            highlightOverlay.style.left = rect.left + window.scrollX - 4 + 'px';
+    
+            document.body.appendChild(highlightOverlay);
+        }
+    };    
+    
     const createIndicatorList = () => {
     
         const indicatorContainer = createIndicatorContainer();
@@ -284,89 +278,107 @@
         // const focusableElements = document.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
         const focusableElements = document.querySelectorAll('a, button');
     
-        // Iterate over focusable elements
         focusableElements.forEach((element, i) => {
-            const minPerimeterArea = calculateMinPerimeterArea(element);
-            const outlineValues = getElementOutlineValues(element);
-            const actualPerimeterArea = calculateActualPerimeterArea(element, outlineValues);
-            const parentInformation = getParentInformation(element);
-            const noOutlineSet = actualPerimeterArea === 0;
-            const contrastRatio = getContrastRatio(outlineValues.color, parentInformation.color);
-            const isPassingPerimeter = parseFloat(actualPerimeterArea) >= parseFloat(minPerimeterArea);
-            const isPassingColorContrast = contrastRatio.toFixed(2) >= 3;
-            const isPassingAll = isPassingPerimeter && isPassingColorContrast;
-    
-            // Create a list item for each focusable element
-            const tagName = element.tagName.toLowerCase();
-            const listItem = document.createElement('div');
-            listItem.classList.add("ffp-result-container");
-    
-            // Create a heading element for each focusable elemnt
-            const heading = document.createElement('h2');
-            heading.classList.add('ffp-result-heading')
-            const headingText = document.createElement('span');
-            const headingToggle = document.createElement('span');
-            headingToggle.classList.add('ffp-result-toggle');
-            const headingCheckbox = document.createElement('input');
-            headingCheckbox.type = "checkbox";
-            headingCheckbox.name = "toggleHighlight";
-            headingCheckbox.id = "headingCheckbox" + i;
-            headingCheckbox.classList.add('headingCheckbox');
-            headingCheckbox.addEventListener('change', function() {
-                createHighlightOverlay(element, i)
-            });
-            const headinglabel = document.createElement('label');
-            headinglabel.htmlFor = "headingCheckbox" + i;
-            headinglabel.appendChild(document.createTextNode("Highlight"));
-
-            headingToggle.appendChild(headinglabel);
-            headingToggle.appendChild(headingCheckbox);
-            headingText.textContent = "<" + tagName + ' />';
-            headingText.classList.add('ffp-result-heading-text');
-            heading.appendChild(headingText);
-            heading.appendChild(headingToggle);
-            listItem.appendChild(heading);
-    
-            const dl = document.createElement('dl');
-            const dt1 = document.createElement('dt');
-            dt1.textContent = "Text Content";
-            const dd1 = document.createElement('dd');
-            dd1.textContent = element.textContent;
-            const dt2 = document.createElement('dt');
-            dt2.textContent = "Focus area (minimum " + minPerimeterArea + "):";
-            const dd2 = document.createElement('dd');
-            const dd2spantext = document.createElement('span');
-            dd2spantext.textContent = noOutlineSet ? "Outline removed" : actualPerimeterArea;
-            const dd2passFailText = document.createElement('small');
-            dd2passFailText.textContent = isPassingPerimeter ? "Pass" : "Fail";
-            dd2passFailText.classList.add('ffp-result')
-            dd2passFailText.classList.add(isPassingPerimeter ? "ffp-result_pass" : "ffp-result_fail");
-            dd2.appendChild(dd2spantext);
-            dd2.appendChild(dd2passFailText);
-    
-            const dt3 = document.createElement('dt');
-            dt3.textContent = "Contrast ratio (minimum 3:1)";
-            const dd3 = document.createElement('dd');
-            const dd3spantext = document.createElement('span');
-            dd3spantext.textContent = contrastRatio.toFixed(2) + ":1";
-            const dd3passFailText = document.createElement('small');
-            dd3passFailText.textContent = isPassingColorContrast ? "Pass" : "Fail";
-            dd3passFailText.classList.add('ffp-result')
-            dd3passFailText.classList.add(isPassingColorContrast ? "ffp-result_pass" : "ffp-result_fail");
-            dd3.appendChild(dd3spantext);
-            dd3.appendChild(dd3passFailText);
-            
-            dl.appendChild(dt1);
-            dl.appendChild(dd1);
-            dl.appendChild(dt2);
-            dl.appendChild(dd2);
-            dl.appendChild(dt3);
-            dl.appendChild(dd3);
-    
-            listItem.appendChild(dl);    
-            indicatorContainer.appendChild(listItem);
+            const listItem = createListItem(element, i);
+            fragment.appendChild(listItem);
         });
+
+        indicatorContainer.appendChild(fragment);
     };
+
+    // Function to create a list item for a focusable element
+    const createListItem = (element, i) => {
+        // Create the list item
+        const listItem = document.createElement('div');
+        listItem.classList.add('ffp-result-container');
+
+        // Create heading
+        const heading = document.createElement('h2');
+        heading.classList.add('ffp-result-heading');
+
+        // Create heading text
+        const headingText = document.createElement('span');
+        headingText.textContent = `<${element.tagName.toLowerCase()} />`;
+        headingText.classList.add('ffp-result-heading-text');
+
+        // Create toggle checkbox
+        const headingToggle = document.createElement('span');
+        headingToggle.classList.add('ffp-result-toggle');
+        const headingCheckbox = document.createElement('input');
+        headingCheckbox.type = "checkbox";
+        headingCheckbox.name = "toggleHighlight";
+        headingCheckbox.id = `headingCheckbox${i}`;
+        headingCheckbox.classList.add('headingCheckbox');
+        headingCheckbox.addEventListener('change', function() {
+            createHighlightOverlay(element, i)
+        });
+        const headinglabel = document.createElement('label');
+        headinglabel.htmlFor = `headingCheckbox${i}`;
+        headinglabel.appendChild(document.createTextNode("Highlight"));
+        headingToggle.appendChild(headinglabel);
+        headingToggle.appendChild(headingCheckbox);
+
+        heading.appendChild(headingText);
+        heading.appendChild(headingToggle);
+
+        listItem.appendChild(heading);
+
+        // Create details list
+        const detailsList = document.createElement('dl');
+
+        const minPerimeterArea = calculateMinPerimeterArea(element);
+        const outlineValues = getElementOutlineValues(element);
+        const actualPerimeterArea = calculateActualPerimeterArea(element, outlineValues);
+        const parentInformation = getParentInformation(element);
+        const contrastRatio = getContrastRatio(outlineValues.color, parentInformation.color);
+        const isPassingPerimeter = parseFloat(actualPerimeterArea) >= parseFloat(minPerimeterArea);
+        const outlineValueText = actualPerimeterArea === 0 ? "Outline removed" : actualPerimeterArea;
+        const contrastRatioFormatted = contrastRatio.toFixed(2) + ":1";
+
+        // Create detail items
+        const textContentItem = createDetailItem('Text Content', element.textContent, null);
+        const perimeterAreaItem = createDetailItem(`Focus area (minimum ${minPerimeterArea}):`, outlineValueText, isPassingPerimeter);
+        const contrastRatioItem = createDetailItem('Contrast ratio (minimum 3:1)', contrastRatioFormatted, contrastRatio >= 3);
+    
+        console.log(element.textContent)
+        console.log(outlineValues)
+
+        // Append detail items to details list
+        detailsList.appendChild(textContentItem);
+        detailsList.appendChild(perimeterAreaItem);
+        detailsList.appendChild(contrastRatioItem);
+
+        listItem.appendChild(detailsList);
+
+        return listItem;
+    };
+
+    const createDetailItem = (label, value, pass) => {
+        const dt = document.createElement('dt');
+        dt.textContent = label;
+
+        const dd = document.createElement('dd');
+
+        const ddtext = document.createElement('span');
+        ddtext.textContent = value;
+        
+        dd.appendChild(ddtext);
+
+        if(pass != null){
+            const ddpassFailText = document.createElement('small');
+            ddpassFailText.textContent = pass ? "Pass" : "Fail";
+            ddpassFailText.classList.add('ffp-result')
+            ddpassFailText.classList.add(pass ? "ffp-result_pass" : "ffp-result_fail");
+            dd.appendChild(ddpassFailText);
+        }
+
+        const item = document.createElement('div');
+        item.appendChild(dt);
+        item.appendChild(dd);
+
+        return item;
+    };
+
     
     if (indicatorContainerExists) {
         indicatorContainerExists.parentNode.removeChild(indicatorContainerExists);
